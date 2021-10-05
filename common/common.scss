@@ -1,0 +1,151 @@
+/* CSS for accept answer popup */
+.accept-answer-popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--highlight-medium);
+    color: var(--primary);
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    box-shadow: 0 2px 2px 2px rgba(196, 190, 190, 0.66) !important;
+    font-size: var(--font-up-1);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 299;
+    @include breakpoint(mobile-large) {
+        width: 100%;
+        text-align: left;        
+        font-size: var(--font-up-1);
+    }
+    .accept-answer-popup-wrapper {
+        .close-accept-answer-popup {
+            position: relative;
+            @include breakpoint(mobile-large) {
+                font-size: 0.5em !important;
+            }
+            .close {
+                float: right;
+                color: var(--primary);
+                font-size: var(--font-up-1);
+                background-color: #ffffff;
+                padding: 5px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                line-height: 1;
+                margin-right: 10px;
+                @include breakpoint(mobile-large) {
+                    margin-right: 5px;
+                }
+                -webkit-transition: all 0.3s ease;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                &:hover {
+                    background-color: #000;
+                    color: #ffffff;
+                }
+            }
+        }
+        .accept-answer-content {
+            margin: auto;
+            padding: 10px 0 10px 0;
+            display:flex;
+            max-width: calc(100% - 16px);
+            width: 1110px;
+            flex-direction: column;
+            .accept-answer-img {               
+                
+                @include breakpoint(mobile-large) {  
+                    position:relative;
+                    height: 84px;
+                }                
+                img{                           
+                flex-grow: 1;
+                margin-top: 5px;                
+                    @include breakpoint(mobile-large) {  
+                        position: absolute;                                            
+                        clip: rect(0px,300px,84px,0px);
+                        left: 50%;
+                        margin-left: -150px;
+                    }
+                }
+            }
+        }        
+    }
+}
+//If scoll the page in mobile view then set margin
+body:not(.tab-bar-hidden){
+    .accept-answer-popup{
+        @include breakpoint(mobile-large) {
+            margin-bottom: 45px !important;            
+        }
+    }
+}
+//For Soution botton
+.posts-wrapper{
+    .post-controls{        
+        //Set css for solution button not expanded in mobile view.
+        @include breakpoint(mobile-large) {
+            &:not(.expanded){
+                .actions{
+                    flex-wrap: wrap;                                         
+                    .extra-buttons{                   
+                        flex: 0 0 100%;                                              
+                        .widget-button.unaccepted{                                       
+                                float: right;                                                
+                        }
+                        .widget-button.accepted{                                        
+                                float: right;                                            
+                        }
+                    }  
+                }       
+            }   
+        }   
+        
+        .extra-buttons{    
+            .btn-flat.accepted:hover .d-icon.d-icon-check-square {
+                color: green;
+            }
+             //Set css for not selected solution button                       
+            .widget-button.unaccepted{
+                border: 1px solid var(--highlight);
+                background: var(--highlight-low);
+                font-weight: bold; 
+            } 
+            //Set css for selected solution button                  
+            .widget-button.accepted, span.accepted-text {
+                background: var(--success-low);
+                border: 3px solid green;
+                font-weight: bold;
+                
+            }
+            @include breakpoint(mobile-large) {
+                span.accepted-text { 
+                    background: none;
+                    border: none;
+                    font-weight: normal;
+                }
+                
+            }        
+        } 
+    }  
+    //Set accepted answer more grrenish in the topic post.              
+    #post_1 aside.quote.accepted-answer{        
+        .by a{
+            color: green !important;
+            font-weight: bold;
+        }
+        .title {
+            background-color: var(--success-low);
+        }        
+        blockquote {        
+            background-color:var(--success-low);
+            .highlighted{
+                background-color:var(--success-low);
+
+            }
+        }
+    }
+}

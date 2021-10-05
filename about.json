@@ -1,0 +1,20 @@
+   
+{
+  "name": "techcommunity-accept-answer-popup",
+  "component": true,
+  "license_url": null,
+  "about_url": "https://github.com/webdirektindia",
+  "authors": "Webdirekt",
+  "theme_version": null,
+  "minimum_discourse_version": null,
+  "maximum_discourse_version": null,
+  "date": "28-09-21",
+  "assets": {
+  "topic_solution_btn_img" : "assets/topic_solution_btn_img.png"
+  },
+  "color_schemes": {
+  },
+  "modifiers": {
+  },
+  "learn_more": "https://meta.discourse.org/t/beginners-guide-to-using-discourse-themes/91966"
+}

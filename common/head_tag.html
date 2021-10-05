@@ -1,0 +1,75 @@
+<script type="text/discourse-plugin" version="0.8">
+    /**
+    **Create Popup for topic for authors[Added By: Ajroddin, Date: 28/09/2021]
+    **/
+    //Imports
+    const { h } = require('virtual-dom');
+    const { getOwner } = require("discourse-common/lib/get-owner"); 
+
+    //Created  a widget to display the Accept Answer popup on topic page to the topic author, if topic has at least one reply and none of the reply is accepted as answer. 
+    api.createWidget("accept-answer-popup-widget", {  
+        tagName: 'div.accept-answer-popup-widget',
+        buildKey: () => 'accept-answer-popup-widget',
+        html(attrs, state) {
+            //Generating the UI for the popup using virtual-dom
+            let popupContent = h('div.accept-answer-popup', 
+                            h('div.accept-answer-popup-wrapper',[
+                                h('div.close-accept-answer-popup',this.attach("button", {
+                                    label: "",
+                                    title: "Close",
+                                    icon: "times",
+                                    action: "buttonPressed",
+                                    actionParam: "close",
+                                    className: "close"
+                                  })),
+                                h('div.accept-answer-content',[
+                                    h('div.accept-answer-description', [
+                                        h('h3',"Did you get the answer to your question?"),                                          
+                                        h('sapn',"If yes, please mark it as an "), 
+                                        h('b', h('i', "“Accepted answer”")), 
+                                        h('span'," in the bottom of the helpful topic reply:"),    
+                                    ]),
+                                    h('div.accept-answer-img', h('img', {src: settings.theme_uploads.topic_solution_btn_img}))
+                                    
+                                    ])
+                            ])
+                        );
+
+            const topicController = getOwner(this).lookup("controller:topic");
+            //Get current user  
+            var currentUser = api.getCurrentUser();      
+            //Get current url
+            let currentURL = window.location.pathname;
+            //If user is not logged-in OR not on topic page then return empty content. Else proceed.
+            if(!currentUser || !(/^\/t\//.test(currentURL)))
+                return;        
+
+            //Get the author id to check whether logged-in user is author of the current topic.
+            let authorId = topicController.model.user_id;            
+            //Check whether logged-in users is the authore of the current topic.
+            if(currentUser.id == authorId)
+            {   let currentTopic =  topicController.model;   
+                //If topic object is valid.           
+                if(currentTopic){
+                    //If topic has at least one reply and non of the reply is marked as accepted answer then display Accept Answer Popup.
+                    if(currentTopic.replyCount > 0 && !currentTopic.accepted_answer)
+                        return popupContent;
+                }
+            }  
+            //Return empty content. So Accept Answer Popup will not display.         
+            return;
+         },
+         //Close the Popup on the click of close button.
+         buttonPressed(button) {
+            if(button == "close") {
+              $(".accept-answer-popup").addClass("hidden");
+            }
+         }
+    });
+
+    //Attaching the accept-answer-popup-widget after the post-stream widget.
+    api.decorateWidget('post-stream:after', function(helper) {
+        return helper.attach('accept-answer-popup-widget');
+    });
+</script>    
+    
