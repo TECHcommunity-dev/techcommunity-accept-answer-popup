@@ -44,7 +44,7 @@
             if(!currentUser || !(/^\/t\//.test(currentURL)))
                 return;        
             //If current topic category does not alows to accept answer then return empty content. Else proceed.
-            if(!topicController.model.category.enable_accepted_answers){
+            if(topicController.model.category && !topicController.model.category.enable_accepted_answers){
                 return;
             }
             
