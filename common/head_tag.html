@@ -43,7 +43,11 @@
             //If user is not logged-in OR not on topic page then return empty content. Else proceed.
             if(!currentUser || !(/^\/t\//.test(currentURL)))
                 return;        
-
+            //If current topic category does not alows to accept answer then return empty content. Else proceed.
+            if(!topicController.model.category.enable_accepted_answers){
+                return;
+            }
+            
             //Get the author id to check whether logged-in user is author of the current topic.
             let authorId = topicController.model.user_id;            
             //Check whether logged-in users is the authore of the current topic.
