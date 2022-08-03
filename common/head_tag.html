@@ -5,6 +5,7 @@
     //Imports
     const { h } = require('virtual-dom');
     const { getOwner } = require("discourse-common/lib/get-owner"); 
+    const FORUM_CATEGORY_NAME = "Forum";
 
     //Created  a widget to display the Accept Answer popup on topic page to the topic author, if topic has at least one reply and none of the reply is accepted as answer. 
     api.createWidget("accept-answer-popup-widget", {  
@@ -44,8 +45,12 @@
             if(!currentUser || !(/^\/t\//.test(currentURL)))
                 return;
                 
-            //If current topic is not private message AND current topic category alows to accept answer then proceed, Else return empty content.
-            if(!topicController.model.isPrivateMessage && topicController.model.category && topicController.model.category.enable_accepted_answers){
+            //Modified the below confition to display "Mark as accepted answer" popup only for topic under Forum category. [Modified by: Saurabh; Date: 03-08-2022]
+            //If current topic is not private message AND current topic category allows to accept answer AND current topic category is Forum then proceed, Else return empty content.
+            if(!topicController.model.isPrivateMessage && 
+                topicController.model.category && 
+                    topicController.model.category.enable_accepted_answers && 
+                        topicController.model.category.name == FORUM_CATEGORY_NAME){
                 //Get the author id to check whether logged-in user is author of the current topic.
                 let authorId = topicController.model.user_id;            
                 //Check whether logged-in users is the authore of the current topic.
