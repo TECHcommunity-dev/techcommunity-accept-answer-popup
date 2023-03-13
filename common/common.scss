@@ -77,7 +77,7 @@
         }        
     }
 }
-//If scoll the page in mobile view then set margin
+//If scroll the page in mobile view then set margin
 body:not(.tab-bar-hidden){
     .accept-answer-popup{
         @include breakpoint(mobile-large) {
@@ -85,7 +85,7 @@ body:not(.tab-bar-hidden){
         }
     }
 }
-//For Soution botton
+//For Solution button
 .posts-wrapper{
     .post-controls{        
         //Set css for solution button not expanded in mobile view.
@@ -133,7 +133,7 @@ body:not(.tab-bar-hidden){
             }        
         } 
     }  
-    //Set accepted answer more grrenish in the topic post.              
+    //Set accepted answer more greenish in the topic post.              
     #post_1 aside.quote.accepted-answer{        
         .by a{
             color: green !important;

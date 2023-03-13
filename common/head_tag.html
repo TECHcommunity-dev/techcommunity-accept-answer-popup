@@ -45,7 +45,7 @@
             if(!currentUser || !(/^\/t\//.test(currentURL)))
                 return;
                 
-            //Modified the below confition to display "Mark as accepted answer" popup only for topic under Forum category. [Modified by: Saurabh; Date: 03-08-2022]
+            //Modified the below condition to display "Mark as accepted answer" popup only for topics under Forum category. [Modified by: Saurabh; Date: 03-08-2022]
             //If current topic is not private message AND current topic category allows to accept answer AND current topic category is Forum then proceed, Else return empty content.
             if(!topicController.model.isPrivateMessage && 
                 topicController.model.category && 
