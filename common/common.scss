@@ -114,14 +114,11 @@ body:not(.tab-bar-hidden){
             .widget-button.unaccepted{
                 border: 1px solid var(--highlight);
                 background: var(--highlight-low);
-                font-weight: bold; 
             } 
             //Set css for selected solution button                  
             .widget-button.accepted, span.accepted-text {
                 background: var(--success-low);
-                border: 3px solid green;
-                font-weight: bold;
-                
+                border: 3px solid green;                
             }
             @include breakpoint(mobile-large) {
                 span.accepted-text { 
